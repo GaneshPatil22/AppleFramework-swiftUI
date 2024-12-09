@@ -8,17 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let conent: [GridItem] = [GridItem(.flexible()),
+                              GridItem(.flexible()),
+                              GridItem(.flexible())]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: conent) {
+                    ForEach(MockData.frameworks) { framework in
+                        FrameworkCellView(framework: framework)
+                    }
+                }
+            }
+            .navigationTitle("🍎 Apple Frameworks")
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+}
+
+struct FrameworkCellView: View {
+    let framework: Framework
+    var body: some View {
+        VStack {
+            Image(framework.imageName)
+                .resizable()
+                .frame(width: 90, height: 90)
+            Text(framework.name)
+                .font(.title2)
+                .scaledToFit()
+                .fontWeight(.semibold)
+                .minimumScaleFactor(0.5)
+        }
+        .padding()
+    }
 }
