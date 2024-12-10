@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var vm = AppleFrameworkViewModel()
+    
     let conent: [GridItem] = [GridItem(.flexible()),
                               GridItem(.flexible()),
                               GridItem(.flexible())]
@@ -19,10 +21,16 @@ struct ContentView: View {
                 LazyVGrid(columns: conent) {
                     ForEach(MockData.frameworks) { framework in
                         FrameworkCellView(framework: framework)
+                            .onTapGesture {
+                                self.vm.selectedFramework = framework
+                            }
                     }
                 }
             }
             .navigationTitle("🍎 Apple Frameworks")
+        }
+        .sheet(isPresented: $vm.isPresentedModel) {
+            DetaiiView(framework: vm.selectedFramework ?? MockData.sampleFramework, isPresentedModel: $vm.isPresentedModel)
         }
     }
 }
