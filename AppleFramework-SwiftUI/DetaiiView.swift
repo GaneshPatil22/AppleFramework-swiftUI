@@ -39,7 +39,7 @@ struct DetaiiView: View {
             Spacer()
             
             Button {
-                print("Open web view.")
+                print("Open web view")
             } label: {
                 Text("Learn More")
                     .font(.title2)
