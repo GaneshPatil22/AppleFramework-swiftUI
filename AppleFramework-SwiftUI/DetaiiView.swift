@@ -11,6 +11,7 @@ struct DetaiiView: View {
     
     let framework: Framework
     @Binding var isPresentedModel: Bool
+    @State var isShowingSafariVIew: Bool = false
     
     var body: some View {
         VStack {
@@ -40,6 +41,7 @@ struct DetaiiView: View {
             
             Button {
                 print("Open web view")
+                self.isShowingSafariVIew = true
             } label: {
                 Text("Learn More")
                     .font(.title2)
@@ -49,7 +51,8 @@ struct DetaiiView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
-            
+        }.fullScreenCover(isPresented: $isShowingSafariVIew) {
+            SafariView(url: URL(string: framework.urlString)!)
         }
     }
 }
