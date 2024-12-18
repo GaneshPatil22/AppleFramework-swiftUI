@@ -43,7 +43,7 @@ struct DetaiiView: View {
                 print("Open web view")
                 self.isShowingSafariVIew = true
             } label: {
-                Text("Learn More.")
+                Text("Learn More")
                     .font(.title2)
                     .fontWeight(.bold)
                     .frame(width: 250, height: 40)
